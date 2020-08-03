@@ -21,7 +21,7 @@ class App:
 
     def open_file(self):
         file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                                        filetypes=(("jpg files","*.jpg"),("png files","*.png")))
+                                        filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
         if file is not None:
             self.extract_data(file)
 
