@@ -9,8 +9,8 @@ class App:
         self.ventana.title("DATA EXTRACTOR")
         #self.ventana.geometry("630x200")
 
-        self.canvas = Canvas(self.ventana,bg='black',width=630,height=400)
-        self.canvas.pack()
+        self.display = scrolledtext.ScrolledText(self.ventana,bg="black",width=65,height=20)
+        self.display.pack(side=TOP)
         
         self.ventana.mainloop()
 
