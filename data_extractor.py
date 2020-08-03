@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from tkinter import *
 import tkinter.scrolledtext as scrolledtext
 from tkinter import filedialog
@@ -24,6 +26,7 @@ class App:
             self.extract_data(file)
 
     def extract_data(self,f):
+        self.display.delete('1.0',END)
         image = Image.open(f)
         exifdata = image._getexif()
 
@@ -38,9 +41,6 @@ class App:
             self.display.insert(END,'NO DATA')
 
     
-            
-            
-
 if __name__=="__main__":
     App()
 
