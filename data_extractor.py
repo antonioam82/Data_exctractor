@@ -37,7 +37,7 @@ class App:
                 data = exifdata.get(tag_id)
                 if isinstance(data, bytes):
                     data = data.decode('UTF8','replace')
-                self.display.insert(END,'{} {}'.format(tag,data)+"\n")
+                self.display.insert(END,'{}: {}'.format(tag,data)+"\n")
         else:
             self.display.insert(END,'NO DATA')
 
