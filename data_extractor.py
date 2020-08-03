@@ -11,8 +11,11 @@ class App:
 
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",width=65,height=20)
         self.display.pack(side=TOP)
+        self.btn_search = Button(self.ventana,text="SEARCH FILE",bg="orange",width=30)
+        self.btn_search.pack(side=TOP)
         
         self.ventana.mainloop()
 
 if __name__=="__main__":
     App()
+
