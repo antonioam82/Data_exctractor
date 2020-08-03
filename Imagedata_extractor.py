@@ -12,7 +12,7 @@ class App:
         self.ventana.title("DATA EXTRACTOR")
         self.ventana.configure(bg="light blue")
 
-        self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="green",width=65,height=20)
+        self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
         self.display.pack(side=TOP)
         self.btn_search = Button(self.ventana,text="SEARCH FILE",bg="orange",width=30,command=self.open_file)
         self.btn_search.pack(side=TOP)
@@ -32,7 +32,7 @@ class App:
             exifdata = image._getexif()
 
             if exifdata is not None:
-                self.display.insert(END,"-----------METADATA INFO-----------\n")
+                self.display.insert(END,"-"*26+"METADATA INFO"+"-"*26+"\n")
                 for tag_id in exifdata:
                     tag = TAGS.get(tag_id, tag_id)
                     data = exifdata.get(tag_id)
