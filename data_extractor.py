@@ -21,7 +21,7 @@ class App:
 
     def open_file(self):
         file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                                        filetypes=(("jpg files","*.jpg"),("png files","*.jpg")))
+                                        filetypes=(("jpg files","*.jpg"),("png files","*.png")))
         if file is not None:
             self.extract_data(file)
 
@@ -31,6 +31,7 @@ class App:
         exifdata = image._getexif()
 
         if exifdata is not None:
+            self.display.insert(END,"-----------METADATA-----------\n")
             for tag_id in exifdata:
                 tag = TAGS.get(tag_id, tag_id)
                 data = exifdata.get(tag_id)
