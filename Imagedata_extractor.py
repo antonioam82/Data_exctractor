@@ -10,7 +10,7 @@ class App:
     def __init__(self):
         self.ventana = Tk()
         self.ventana.title("DATA EXTRACTOR")
-        #self.ventana.geometry("630x200")
+        self.ventana.configure(bg="light blue")
 
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="green",width=65,height=20)
         self.display.pack(side=TOP)
@@ -27,19 +27,22 @@ class App:
 
     def extract_data(self,f):
         self.display.delete('1.0',END)
-        image = Image.open(f)
-        exifdata = image._getexif()
+        try:
+            image = Image.open(f)
+            exifdata = image._getexif()
 
-        if exifdata is not None:
-            self.display.insert(END,"-----------METADATA INFO-----------\n")
-            for tag_id in exifdata:
-                tag = TAGS.get(tag_id, tag_id)
-                data = exifdata.get(tag_id)
-                if isinstance(data, bytes):
-                    data = data.decode('UTF8','replace')
-                self.display.insert(END,'{}: {}'.format(tag,data)+"\n")
-        else:
-            self.display.insert(END,'NO DATA')
+            if exifdata is not None:
+                self.display.insert(END,"-----------METADATA INFO-----------\n")
+                for tag_id in exifdata:
+                    tag = TAGS.get(tag_id, tag_id)
+                    data = exifdata.get(tag_id)
+                    if isinstance(data, bytes):
+                        data = data.decode('UTF8','replace')
+                    self.display.insert(END,'{}: {}'.format(tag,data)+"\n")
+            else:
+                self.display.insert(END,'NO DATA')
+        except:
+            self.display.insert(END,'ERROR')
 
     
 if __name__=="__main__":
