@@ -11,7 +11,8 @@ class App:
         self.ventana = Tk()
         self.ventana.title("DATA EXTRACTOR")
         self.ventana.configure(bg="light blue")
-
+        self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
+        self.file_label.pack(side=TOP)
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
         self.display.pack(side=TOP)
         self.btn_search = Button(self.ventana,text="SEARCH FILE",bg="orange",width=30,command=self.open_file)
@@ -23,6 +24,7 @@ class App:
         file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
                                         filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
         if file is not None:
+            self.file_label.configure(text=(file).split("/")[-1])
             self.extract_data(file)
 
     def extract_data(self,f):
