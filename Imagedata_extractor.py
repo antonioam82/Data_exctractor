@@ -24,7 +24,7 @@ class App:
     def open_file(self):
         file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
                                         filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
-        if file is not None:
+        if file != "":
             self.file_label.configure(text=(file).split("/")[-1])
             self.extract_data(file)
 
