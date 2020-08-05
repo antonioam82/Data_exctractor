@@ -9,7 +9,7 @@ from PIL.ExifTags import TAGS
 class App:
     def __init__(self):
         self.ventana = Tk()
-        self.ventana.title("DATA EXTRACTOR")
+        self.ventana.title("EXIF DATA VIEWER")
         self.ventana.configure(bg="light blue")
         self.ventana.geometry("565x371")
         self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
@@ -42,7 +42,6 @@ class App:
                     if isinstance(data, bytes):
                         data = data.decode('UTF8','replace')
                     self.display.insert(END,f"{tag:26}: {data}"+"\n")
-                    #self.display.insert(END,'{}: {}'.format(tag,data)+"\n")
             else:
                 self.display.insert(END,'NO DATA')
         except:
@@ -51,4 +50,5 @@ class App:
     
 if __name__=="__main__":
     App()
+
 
