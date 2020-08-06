@@ -12,6 +12,7 @@ class App:
         self.ventana.title("EXIF DATA VIEWER")
         self.ventana.configure(bg="light blue")
         self.ventana.geometry("565x371")
+        #self.ventana.tk.call('encoding', 'system', 'unicode')
         self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
         self.file_label.pack(side=TOP)
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
@@ -33,7 +34,7 @@ class App:
         try:
             image = Image.open(f)
             exifdata = image._getexif()
-
+            
             if exifdata is not None:
                 self.display.insert(END,"-"*26+"METADATA INFO"+"-"*26+"\n")
                 for tag_id in exifdata:
@@ -41,7 +42,10 @@ class App:
                     data = exifdata.get(tag_id)
                     if isinstance(data, bytes):
                         data = data.decode('UTF8','replace')
-                    self.display.insert(END,f"{tag:26}: {data}"+"\n")
+                    try:
+                        self.display.insert(END,f"{tag:26}: {data}"+"\n")
+                    except:
+                        pass
             else:
                 self.display.insert(END,'NO DATA')
         except:
