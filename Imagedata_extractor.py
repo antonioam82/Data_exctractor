@@ -44,7 +44,7 @@ class App:
                     try:
                         self.display.insert(END,f"{tag:26}: {data}"+"\n")
                     except:
-                        pass
+                        continue
             else:
                 self.display.insert(END,'NO DATA')
         except:
