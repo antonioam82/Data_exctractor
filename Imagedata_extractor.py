@@ -9,7 +9,7 @@ from PIL.ExifTags import TAGS
 class App:
     def __init__(self):
         self.ventana = Tk()
-        self.ventana.title("EXIF DATA VIEWERhhh")
+        self.ventana.title("EXIF DATA VIEWER")
         self.ventana.configure(bg="light blue")
         self.ventana.geometry("565x371")
         self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
