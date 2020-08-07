@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from tkinter import *
+import re
 import tkinter.scrolledtext as scrolledtext
 from tkinter import filedialog
 from PIL import Image
@@ -41,11 +42,8 @@ class App:
                     data = exifdata.get(tag_id)
                     if isinstance(data, bytes):
                         data = data.decode('UTF8','replace')
-                    try:
-                        self.display.insert(END,f"{tag:26}: {data}"+"\n")
-                    except:
-                        #print(tag)
-                        pass
+                        data = re.sub('[^a-zA-Z0-9 \n\.]', '', data)######################
+                    self.display.insert(END,f"{tag:26}: {data}"+"\n")
             else:
                 self.display.insert(END,'NO DATA')
         except:
