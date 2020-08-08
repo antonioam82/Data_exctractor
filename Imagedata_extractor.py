@@ -6,6 +6,9 @@ import tkinter.scrolledtext as scrolledtext
 from tkinter import filedialog
 from PIL import Image
 from PIL.ExifTags import TAGS
+import warnings
+
+warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)
 
 class App:
     def __init__(self):
@@ -13,6 +16,7 @@ class App:
         self.ventana.title("EXIF DATA VIEWER")
         self.ventana.configure(bg="light blue")
         self.ventana.geometry("565x371")
+        #self.ventana.tk.call('encoding', 'system', 'unicode')
         self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
         self.file_label.pack(side=TOP)
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
