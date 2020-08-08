@@ -16,7 +16,6 @@ class App:
         self.ventana.title("EXIF DATA VIEWER")
         self.ventana.configure(bg="light blue")
         self.ventana.geometry("565x371")
-        #self.ventana.tk.call('encoding', 'system', 'unicode')
         self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
         self.file_label.pack(side=TOP)
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
