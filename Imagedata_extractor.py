@@ -49,13 +49,17 @@ class App:
                     except:
                         data = re.sub('[^a-zA-Z0-9 \n\.]', '', data)
                         self.display.insert(END,f"{tag:26}: {data}"+"\n")
+                self.display.insert(END,"-"*65)
             else:
-                self.display.insert(END,'NO DATA')
+                self.display.insert(END,'NO DATA.')
         except:
-            self.display.insert(END,'ERROR')
+            self.display.insert(END,'ERROR.')
 
     
 if __name__=="__main__":
     App()
+
+
+
 
 
