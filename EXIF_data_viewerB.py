@@ -7,6 +7,7 @@ from tkinter import filedialog
 from PIL import Image
 from PIL.ExifTags import TAGS
 import warnings
+import piexif
 
 warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)
 
@@ -22,17 +23,17 @@ class App:
         self.display.pack(side=TOP)
         self.btn_search = Button(self.ventana,text="SEARCH FILE",bg="orange",width=30,command=self.open_file)
         self.btn_search.pack(side=TOP)
-        self.btn_delete = Button(self.ventana,text="DELETE EXIF DATA",bg="orange",width=30)
+        self.btn_delete = Button(self.ventana,text="DELETE EXIF DATA",bg="orange",width=30,command=self.remove)
         self.btn_delete.pack(side=TOP)
         
         self.ventana.mainloop()
 
     def open_file(self):
-        file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
+        self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
                                         filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
-        if file != "":
-            self.file_label.configure(text=(file).split("/")[-1])
-            self.extract_data(file)
+        if self.file != "":
+            self.file_label.configure(text=(self.file).split("/")[-1])
+            self.extract_data(self.file)
 
     def extract_data(self,f):
         self.display.delete('1.0',END)
@@ -56,6 +57,10 @@ class App:
                 self.display.insert(END,'NO DATA.')
         except:
             self.display.insert(END,'ERROR.')
+
+    def remove(self):
+        piexif.remove(self.file)
+        self.extract_data(self.file)
 
     
 if __name__=="__main__":
