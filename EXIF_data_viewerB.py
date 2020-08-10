@@ -17,6 +17,7 @@ class App:
         self.ventana.title("EXIF DATA VIEWER")
         self.ventana.configure(bg="light blue")
         self.ventana.geometry("565x398")
+        self.file = ""
         self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
         self.file_label.pack(side=TOP)
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
@@ -59,8 +60,9 @@ class App:
             self.display.insert(END,'ERROR.')
 
     def remove(self):
-        piexif.remove(self.file)
-        self.extract_data(self.file)
+        if self.file != "":
+            piexif.remove(self.file)
+            self.extract_data(self.file)
 
     
 if __name__=="__main__":
