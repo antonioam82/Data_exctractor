@@ -15,17 +15,17 @@ class App:
     def __init__(self):
         self.ventana = Tk()
         self.ventana.title("EXIF DATA VIEWER")
-        self.ventana.configure(bg="light blue")
-        self.ventana.geometry("565x398")
+        self.ventana.configure(bg="gray68")
+        self.ventana.geometry("565x379")
         self.file = ""
-        self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="light green")
+        self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="gray70",fg="white")
         self.file_label.pack(side=TOP)
         self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
         self.display.pack(side=TOP)
-        self.btn_search = Button(self.ventana,text="SEARCH FILE",bg="orange",width=30,command=self.open_file)
-        self.btn_search.pack(side=TOP)
-        self.btn_delete = Button(self.ventana,text="DELETE EXIF DATA",bg="orange",width=30,command=self.remove)
-        self.btn_delete.pack(side=TOP)
+        self.btn_search = Button(self.ventana,text="SEARCH FILE",bg="light blue",width=30,command=self.open_file)
+        self.btn_search.place(x=12,y=348)
+        self.btn_delete = Button(self.ventana,text="DELETE EXIF DATA",bg="light blue",width=30,command=self.remove)
+        self.btn_delete.place(x=335,y=348)
         
         self.ventana.mainloop()
 
