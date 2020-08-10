@@ -18,9 +18,9 @@ class App:
         self.ventana.configure(bg="gray68")
         self.ventana.geometry("565x379")
         self.file = ""
-        self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="gray70",fg="white")
+        self.file_label = Label(self.ventana,text="NO FILE SELECTED",bg="gray50",fg="white")
         self.file_label.pack(side=TOP)
-        self.display = scrolledtext.ScrolledText(self.ventana,bg="black",fg="light green",width=65,height=20)
+        self.display = scrolledtext.ScrolledText(self.ventana,bg="blue",fg="white",width=65,height=20)
         self.display.pack(side=TOP)
         self.btn_search = Button(self.ventana,text="SEARCH FILE",bg="light blue",width=30,command=self.open_file)
         self.btn_search.place(x=12,y=348)
