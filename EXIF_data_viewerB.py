@@ -44,7 +44,7 @@ class App:
             image = Image.open(f)
             self.exifdata = image._getexif()
             if self.exifdata is not None:
-                self.display.insert(END,"-"*26+"METADATA INFO"+"-"*26+"\n")
+                self.display.insert(END,"-"*28+"EXIF DATA"+"-"*28+"\n")
                 for tag_id in self.exifdata:
                     tag = TAGS.get(tag_id, tag_id)
                     data = self.exifdata.get(tag_id)
