@@ -10,7 +10,7 @@ from PIL.ExifTags import TAGS
 import warnings
 import piexif
 
-warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)
+#warnings.filterwarnings("ignore", "(Possibly )?corrupt EXIF data", UserWarning)
 
 class App:
     def __init__(self):
