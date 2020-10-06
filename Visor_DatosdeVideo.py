@@ -4,7 +4,10 @@ from tkinter import filedialog
 
 class Visor:
     def __init__(self):
+
+        
         self.ventana = Tk()
+        self.rateValue = IntVar()
         self.ventana.configure(bg="gray68")
         self.ventana.geometry("800x540")
         self.ventana.title("VISOR DATOS DE VIDEO")
@@ -15,6 +18,8 @@ class Visor:
         self.btnBuscar.place(x=540,y=12)
         self.labelRate = Label(self.ventana,text="avg frame rate:",bg="gray68",font=("Arial",15,"bold"))
         self.labelRate.place(x=10,y=100)
+        self.entryRate = Entry(self.ventana,textvariable=self.rateValue)
+        self.entryRate.place(x=166,y=106)
 
         self.ventana.mainloop()
 
