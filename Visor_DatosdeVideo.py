@@ -7,7 +7,7 @@ class Visor:
 
         
         self.ventana = Tk()
-        self.rateValue = IntVar()
+        self.rateValue = StringVar()
         self.ventana.configure(bg="gray68")
         self.ventana.geometry("800x540")
         self.ventana.title("VISOR DATOS DE VIDEO")
