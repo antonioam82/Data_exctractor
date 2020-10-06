@@ -1,6 +1,6 @@
 import ffmpeg
 from tkinter import *
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 
 class Visor:
     def __init__(self):
@@ -41,13 +41,16 @@ class Visor:
             self.videoInfo()
 
     def videoInfo(self):
-        probe = ffmpeg.probe(self.archivo)
-        video_streams = [stream for stream in
-        probe["streams"] if stream["codec_type"] == "video"]
-        video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+        try:
+            probe = ffmpeg.probe(self.archivo)
+            video_streams = [stream for stream in
+            probe["streams"] if stream["codec_type"] == "video"]
+            video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
         
-        self.rateValue.set(video_streams[0]['avg_frame_rate'])
-        self.rateBit.set(video_streams[0]['bit_rate'])
+            self.rateValue.set(video_streams[0]['avg_frame_rate'])
+            self.rateBit.set(video_streams[0]['bit_rate'])
+        except:
+            messagebox.showwarning("ERROR","No se pudo extraer la información.")
         
 
 if __name__=="__main__":
