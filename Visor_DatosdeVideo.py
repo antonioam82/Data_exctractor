@@ -28,7 +28,15 @@ class Visor:
                         filetypes=(("mp4 files","*.mp4"),("all files","*.*")))
         if self.archivo != "":
             self.nombreArchivo = (self.archivo).split("/")[-1]
-            self.nomArch.set(self.nombreArchivo) 
+            self.nomArch.set(self.nombreArchivo)
+            self.videoInfo()
+
+    def videoInfo(self):
+        probe = ffmpeg.probe(self.archivo)
+        video_streams = [stream for stream in
+        probe["streams"] if stream["codec_type"] == "video"]
+        video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+        self.rateValue.set(video_streams[0]['avg_frame_rate'])
         
 
 if __name__=="__main__":
