@@ -7,7 +7,10 @@ class Visor:
 
         
         self.ventana = Tk()
+        
         self.rateValue = StringVar()
+        self.rateBit = StringVar()
+        
         self.ventana.configure(bg="gray68")
         self.ventana.geometry("800x540")
         self.ventana.title("VISOR DATOS DE VIDEO")
@@ -16,10 +19,16 @@ class Visor:
         self.videoNameEntry.place(x=10,y=10)
         self.btnBuscar = Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo)
         self.btnBuscar.place(x=540,y=12)
+        
         self.labelRate = Label(self.ventana,text="avg frame rate:",bg="gray68",font=("Arial",15,"bold"))
         self.labelRate.place(x=10,y=100)
         self.entryRate = Entry(self.ventana,textvariable=self.rateValue)
         self.entryRate.place(x=166,y=106)
+        self.labelBitr = Label(self.ventana,text="bit rate:",bg="gray68",font=("Arial",15,"bold"))
+        self.labelBitr.place(x=79,y=130)
+        self.entryBitr = Entry(self.ventana,textvariable=self.rateBit)
+        self.entryBitr.place(x=166,y=135)
+        
 
         self.ventana.mainloop()
 
@@ -36,7 +45,9 @@ class Visor:
         video_streams = [stream for stream in
         probe["streams"] if stream["codec_type"] == "video"]
         video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+        
         self.rateValue.set(video_streams[0]['avg_frame_rate'])
+        self.rateBit.set(video_streams[0]['bit_rate'])
         
 
 if __name__=="__main__":
