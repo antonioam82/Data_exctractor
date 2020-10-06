@@ -13,6 +13,8 @@ class Visor:
         self.videoNameEntry.place(x=10,y=10)
         self.btnBuscar = Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo)
         self.btnBuscar.place(x=540,y=12)
+        self.labelRate = Label(self.ventana,text="avg frame rate:",bg="gray68",font=("Arial",15,"bold"))
+        self.labelRate.place(x=10,y=100)
 
         self.ventana.mainloop()
 
