@@ -10,6 +10,7 @@ class Visor:
         
         self.rateValue = StringVar()
         self.rateBit = StringVar()
+        self.chromaValue = StringVar()
         
         self.ventana.configure(bg="gray68")
         self.ventana.geometry("800x540")
@@ -28,6 +29,10 @@ class Visor:
         self.labelBitr.place(x=79,y=130)
         self.entryBitr = Entry(self.ventana,textvariable=self.rateBit)
         self.entryBitr.place(x=166,y=135)
+        self.labelChroma = Label(self.ventana,text="chroma location:",bg="gray68",font=("Arial",15))
+        self.labelChroma.place(x=3,y=160)
+        self.entryChroma = Entry(self.ventana,textvariable=self.chromaValue)
+        self.entryChroma.place(x=166,y=165)
         
 
         self.ventana.mainloop()
@@ -49,6 +54,7 @@ class Visor:
         
             self.rateValue.set(video_streams[0]['avg_frame_rate'])
             self.rateBit.set(video_streams[0]['bit_rate'])
+            self.chromaValue.set(video_streams[0]['chroma_location'])
         except:
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
         
