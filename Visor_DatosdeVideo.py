@@ -20,11 +20,11 @@ class Visor:
         self.btnBuscar = Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo)
         self.btnBuscar.place(x=540,y=12)
         
-        self.labelRate = Label(self.ventana,text="avg frame rate:",bg="gray68",font=("Arial",15,"bold"))
+        self.labelRate = Label(self.ventana,text="avg frame rate:",bg="gray68",font=("Arial",15))
         self.labelRate.place(x=10,y=100)
         self.entryRate = Entry(self.ventana,textvariable=self.rateValue)
         self.entryRate.place(x=166,y=106)
-        self.labelBitr = Label(self.ventana,text="bit rate:",bg="gray68",font=("Arial",15,"bold"))
+        self.labelBitr = Label(self.ventana,text="bit rate:",bg="gray68",font=("Arial",15))
         self.labelBitr.place(x=79,y=130)
         self.entryBitr = Entry(self.ventana,textvariable=self.rateBit)
         self.entryBitr.place(x=166,y=135)
