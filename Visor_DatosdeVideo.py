@@ -12,6 +12,7 @@ class Visor:
         self.rateBit = StringVar()
         self.chromaValue = StringVar()
         self.codecValue = StringVar()
+        self.codecTag = StringVar()
         
         self.ventana.configure(bg="gray68")
         self.ventana.geometry("800x540")
@@ -38,8 +39,11 @@ class Visor:
         self.labelCodec.place(x=34,y=190)
         self.entryCodec = Entry(self.ventana,textvariable=self.codecValue)
         self.entryCodec.place(x=166,y=195)
+        self.labelCtag = Label(self.ventana,text="codec tag:",bg="gray68",font=("Arial",15))
+        self.labelCtag.place(x=54,y=220)
+        self.entryCtag = Entry(self.ventana,textvariable=self.codecTag)
+        self.entryCtag.place(x=166,y=225)
         
-
         self.ventana.mainloop()
 
     def abrir_archivo(self):
@@ -61,8 +65,11 @@ class Visor:
             self.rateBit.set(video_streams[0]['bit_rate'])
             self.chromaValue.set(video_streams[0]['chroma_location'])
             self.codecValue.set(video_streams[0]['codec_name'])
+            self.codecTag.set(video_streams[0]['codec_tag'])
         except:
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
+
+    
         
 
 if __name__=="__main__":
