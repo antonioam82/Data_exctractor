@@ -13,6 +13,7 @@ class Visor:
         self.chromaValue = StringVar()
         self.codecValue = StringVar()
         self.codecTag = StringVar()
+        self.codecTstr = StringVar()
         
         self.ventana.configure(bg="gray68")
         self.ventana.geometry("800x540")
@@ -43,6 +44,10 @@ class Visor:
         self.labelCtag.place(x=54,y=220)
         self.entryCtag = Entry(self.ventana,textvariable=self.codecTag)
         self.entryCtag.place(x=166,y=225)
+        self.labelcodecTstr = Label(self.ventana,text="codec tag string:",bg="gray68",font=("Arial",15))
+        self.labelcodecTstr.place(x=0,y=250)
+        self.entrycodecTstr = Entry(self.ventana,textvariable=self.codecTstr)
+        self.entrycodecTstr.place(x=166,y=255)
         
         self.ventana.mainloop()
 
@@ -66,6 +71,7 @@ class Visor:
             self.chromaValue.set(video_streams[0]['chroma_location'])
             self.codecValue.set(video_streams[0]['codec_name'])
             self.codecTag.set(video_streams[0]['codec_tag'])
+            self.codecTstr.set(video_streams[0]['codec_tag_string'])
         except:
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
 
