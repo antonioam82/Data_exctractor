@@ -16,8 +16,8 @@ class Visor:
         self.codecTstr = StringVar()
         self.codecTbase = StringVar()
         self.codecType = StringVar()
-        #codec_type
-        #coded_height
+        self.codedHeight = StringVar()
+        self.codecWidth = StringVar()
         #codec_width
         #display_aspect_ratio
         #divx_packed
@@ -68,6 +68,10 @@ class Visor:
         self.labelcodecType.place(x=48,y=310)
         self.entrycodecType = Entry(self.ventana,textvariable=self.codecType)
         self.entrycodecType.place(x=166,y=315)
+        self.labelcodedHeight = Label(self.ventana,text="coded height:",bg=color_ventana,font=("Arial",15))
+        self.labelcodedHeight.place(x=34,y=340)
+        self.entrycodedHeight = Entry(self.ventana,textvariable=self.codedHeight)
+        self.entrycodedHeight.place(x=166,y=345)
         
         self.ventana.mainloop()
 
@@ -94,6 +98,7 @@ class Visor:
             self.codecTstr.set(video_streams[0]['codec_tag_string'])
             self.codecTbase.set(video_streams[0]['codec_time_base'])
             self.codecType.set(video_streams[0]['codec_type'])
+            self.codedHeight.set(video_streams[0]['coded_height'])
         except:
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
 
