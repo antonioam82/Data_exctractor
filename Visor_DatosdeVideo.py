@@ -19,9 +19,8 @@ class Visor:
         self.codedHeight = StringVar()
         self.codecWidth = StringVar()
         self.disaspRatio = StringVar()
+        self.divxPacked = StringVar()
         self.duration =StringVar()
-        #divx_packed
-        #duration
         #duration_ts
         
         
@@ -76,10 +75,14 @@ class Visor:
         self.labeldisaspRatio.place(x=5,y=373)
         self.entrydisaspRatio = Entry(self.ventana,textvariable=self.disaspRatio)
         self.entrydisaspRatio.place(x=166,y=375)
+        self.labeldivxPacked = Label(self.ventana,text="divx packed:",bg=color_ventana,font=("Arial",13))
+        self.labeldivxPacked.place(x=62,y=403)#88
+        self.entrydivxPacked = Entry(self.ventana,textvariable=self.divxPacked)
+        self.entrydivxPacked.place(x=166,y=405)
         self.labelDuration = Label(self.ventana,text="duration:",bg=color_ventana,font=("Arial",13))
-        self.labelDuration.place(x=88,y=403)
+        self.labelDuration.place(x=88,y=433)
         self.entryDuration = Entry(self.ventana,textvariable=self.duration)
-        self.entryDuration.place(x=166,y=405)
+        self.entryDuration.place(x=166,y=435)
         
         self.ventana.mainloop()
 
@@ -108,9 +111,9 @@ class Visor:
             self.codecType.set(self.null_finder('codec_type'))
             self.codedHeight.set(self.null_finder('coded_height'))
             self.disaspRatio.set(self.null_finder('display_aspect_ratio'))
+            self.divxPacked.set(self.null_finder('divx_packed'))
             self.duration.set(self.null_finder('duration'))
-
-            #self.divxPacked.set(video_streams[0]['divx_packed'])
+            
         except Exception as e:
             print(str(e))
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
