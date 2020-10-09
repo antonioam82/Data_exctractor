@@ -120,13 +120,9 @@ class Visor:
             value = self.video_streams[0][campo]
             return value
         except:
-            return "No Info"
+            return "No info available"
             
             
-            
-
-    
-        
 
 if __name__=="__main__":
     Visor()
