@@ -94,26 +94,36 @@ class Visor:
     def videoInfo(self):
         try:
             probe = ffmpeg.probe(self.archivo)
-            video_streams = [stream for stream in
+            self.video_streams = [stream for stream in
             probe["streams"] if stream["codec_type"] == "video"]
-            video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
-        
-            self.rateValue.set(video_streams[0]['avg_frame_rate'])
-            self.rateBit.set(video_streams[0]['bit_rate'])
-            self.chromaValue.set(video_streams[0]['chroma_location'])
-            self.codecValue.set(video_streams[0]['codec_name'])
-            self.codecTag.set(video_streams[0]['codec_tag'])
-            self.codecTstr.set(video_streams[0]['codec_tag_string'])
-            self.codecTbase.set(video_streams[0]['codec_time_base'])
-            self.codecType.set(video_streams[0]['codec_type'])
-            self.codedHeight.set(video_streams[0]['coded_height'])
-            self.disaspRatio.set(video_streams[0]['display_aspect_ratio'])
-            self.duration.set(video_streams[0]['duration'])
+            self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+            #self.rateValue.set(video_streams[0]['avg_frame_rate'])
+            self.rateValue.set(self.null_finder('avg_frame_rate'))
+            self.rateBit.set(self.null_finder('bit_rate'))
+            self.chromaValue.set(self.null_finder('chroma_location'))
+            self.codecValue.set(self.null_finder('codec_name'))
+            self.codecTag.set(self.null_finder('codec_tag'))
+            self.codecTstr.set(self.null_finder('codec_tag_string'))
+            self.codecTbase.set(self.null_finder('codec_time_base'))
+            self.codecType.set(self.null_finder('codec_type'))
+            self.codedHeight.set(self.null_finder('coded_height'))
+            self.disaspRatio.set(self.null_finder('display_aspect_ratio'))
+            self.duration.set(self.null_finder('duration'))
 
             #self.divxPacked.set(video_streams[0]['divx_packed'])
         except Exception as e:
             print(str(e))
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
+
+    def null_finder(self,campo):
+        try:
+            value = self.video_streams[0][campo]
+            return value
+        except:
+            return "No Info"
+            
+            
+            
 
     
         
