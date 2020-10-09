@@ -1,131 +1,167 @@
-import ffmpeg
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from tkinter import *
-from tkinter import filedialog, messagebox
+from tkinter import Button, Label, Tk
+from tkinter import filedialog
+import wave###
+import pyaudio
+import cv2
+import ctypes
+import glob
+import numpy as np
+import pyautogui
+import threading
+import os
 
-class Visor:
-    def __init__(self):
+recording = False
+fourcc = cv2.VideoWriter_fourcc(*"XVID")
+contadores = [0,0,0]
+frame_counter = 0
+
+def init_recorder():
+    global stream, CHUNK, frames, p, RATE, CHANNELS, WAVE_OUTPUT_FILENAME, FORMAT
+    #INIT SOUND RECORDER:
+    CHUNK = 1024
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 2
+    RATE = 44100
+    #RECORD_SECONDS = 5
+    WAVE_OUTPUT_FILENAME = "output.wav"
+    p = pyaudio.PyAudio()
+    frames = []
+
+    stream = p.open(format=FORMAT,
+                channels=CHANNELS,
+                rate=RATE,
+                input=True,
+                frames_per_buffer=CHUNK)
+
+def clear_contador():
+    global contadores
+    contadores = [0,0,0]
+
+def formato(c):
+    if c<10:
+        c="0"+str(c)
+    return c
+
+def get_dir():
+    directorio_actual.set(os.getcwd())
+
+def screen_s():
+    user32 = ctypes.windll.user32
+    user32.SetProcessDPIAware()
+    dimensions = user32.GetSystemMetrics(0),user32.GetSystemMetrics(1)
+    return dimensions
+
+def file_name(tex,ext):
+    count = 0
+    for i in glob.glob('*'+ext):
+        if tex in i:
+            count+=1
+    if count>0:
+        filename=tex+" "+str(count)+ext
+    else:
+        filename=tex+ext
+    return filename
+
+def screen_shoot():
+    pyautogui.screenshot(file_name("screenshoot",".jpg"))
+
+def cuenta(n):
+    global contadores,frame_counter
+    clock['text'] = str(contadores[0])+":"+str(formato(contadores[1]))+":"+str(formato(contadores[2]))
+    if n == 20.0:
+        contadores[2]+=1
+        frame_counter = 0
+        
+    if contadores[2]==60:
+        contadores[2]=0
+        contadores[1]+=1
+    if contadores[1]==60:
+        contadores[1]=0
+        contadores[0]+=1
+    
+def record_state():
+    global out
+    global recording
+    if recording == True:
+        recording = False
+    else:
+        clear_contador()
+        init_recorder()
+        recording = True
+        recorder.configure(text="Stop")
+        t = threading.Thread(target=record_sound)
+        t1=threading.Thread(target=record)
+        t = threading.Thread(target=record_sound)
+        t1.start()
+        t.start()
+        
 
         
-        self.ventana = Tk()
-        
-        self.rateValue = StringVar()
-        self.rateBit = StringVar()
-        self.chromaValue = StringVar()
-        self.codecValue = StringVar()
-        self.codecTag = StringVar()
-        self.codecTstr = StringVar()
-        self.codecTbase = StringVar()
-        self.codecType = StringVar()
-        self.codedHeight = StringVar()
-        self.codecWidth = StringVar()
-        self.disaspRatio = StringVar()
-        self.divxPacked = StringVar()
-        self.duration =StringVar()
-        #duration_ts
-        
-        
+def direct():
+    directorio=filedialog.askdirectory()
+    if directorio!="":
+        os.chdir(directorio)
+        directorio_actual.set(os.getcwd())
 
-        color_ventana = "khaki"
-        self.ventana.configure(bg=color_ventana)
-        self.ventana.geometry("800x540")
-        self.ventana.title("VISOR DATOS DE VIDEO")
-        self.nomArch = StringVar()
-        self.videoNameEntry = Entry(self.ventana,width=45,font=('Arial',15),textvariable=self.nomArch)
-        self.videoNameEntry.place(x=10,y=10)
-        self.btnBuscar = Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo)
-        self.btnBuscar.place(x=540,y=12)
-        
-        self.labelRate = Label(self.ventana,text="avg frame rate:",bg=color_ventana,font=("Arial",13))
-        self.labelRate.place(x=43,y=103)
-        self.entryRate = Entry(self.ventana,textvariable=self.rateValue)
-        self.entryRate.place(x=166,y=106)
-        self.labelBitr = Label(self.ventana,text="bit rate:",bg=color_ventana,font=("Arial",13))
-        self.labelBitr.place(x=97,y=133)
-        self.entryBitr = Entry(self.ventana,textvariable=self.rateBit)
-        self.entryBitr.place(x=166,y=135)
-        self.labelChroma = Label(self.ventana,text="chroma location:",bg=color_ventana,font=("Arial",13))
-        self.labelChroma.place(x=30,y=163)
-        self.entryChroma = Entry(self.ventana,textvariable=self.chromaValue)
-        self.entryChroma.place(x=166,y=165)
-        self.labelCodec = Label(self.ventana,text="codec name:",bg=color_ventana,font=("Arial",13))
-        self.labelCodec.place(x=55,y=193)
-        self.entryCodec = Entry(self.ventana,textvariable=self.codecValue)
-        self.entryCodec.place(x=166,y=195)
-        self.labelCtag = Label(self.ventana,text="codec tag:",bg=color_ventana,font=("Arial",13))
-        self.labelCtag.place(x=73,y=223)
-        self.entryCtag = Entry(self.ventana,textvariable=self.codecTag)
-        self.entryCtag.place(x=166,y=225)
-        self.labelcodecTstr = Label(self.ventana,text="codec tag string:",bg=color_ventana,font=("Arial",13))
-        self.labelcodecTstr.place(x=28,y=253)
-        self.entrycodecTstr = Entry(self.ventana,textvariable=self.codecTstr)
-        self.entrycodecTstr.place(x=166,y=255)
-        self.labelcodecTbase = Label(self.ventana,text="codec time base:",bg=color_ventana,font=("Arial",13))
-        self.labelcodecTbase.place(x=25,y=283)
-        self.entrycodecTbase = Entry(self.ventana,textvariable=self.codecTbase)
-        self.entrycodecTbase.place(x=166,y=285)
-        self.labelcodecType = Label(self.ventana,text="codec type:",bg=color_ventana,font=("Arial",13))
-        self.labelcodecType.place(x=64,y=313)
-        self.entrycodecType = Entry(self.ventana,textvariable=self.codecType)
-        self.entrycodecType.place(x=166,y=315)
-        self.labelcodedHeight = Label(self.ventana,text="coded height:",bg=color_ventana,font=("Arial",13))
-        self.labelcodedHeight.place(x=52,y=343)
-        self.entrycodedHeight = Entry(self.ventana,textvariable=self.codedHeight)
-        self.entrycodedHeight.place(x=166,y=345)
-        self.labeldisaspRatio = Label(self.ventana,text="display aspect ratio:",bg=color_ventana,font=("Arial",13))
-        self.labeldisaspRatio.place(x=5,y=373)
-        self.entrydisaspRatio = Entry(self.ventana,textvariable=self.disaspRatio)
-        self.entrydisaspRatio.place(x=166,y=375)
-        self.labeldivxPacked = Label(self.ventana,text="divx packed:",bg=color_ventana,font=("Arial",13))
-        self.labeldivxPacked.place(x=62,y=403)#88
-        self.entrydivxPacked = Entry(self.ventana,textvariable=self.divxPacked)
-        self.entrydivxPacked.place(x=166,y=405)
-        self.labelDuration = Label(self.ventana,text="duration:",bg=color_ventana,font=("Arial",13))
-        self.labelDuration.place(x=88,y=433)
-        self.entryDuration = Entry(self.ventana,textvariable=self.duration)
-        self.entryDuration.place(x=166,y=435)
-        
-        self.ventana.mainloop()
-
-    def abrir_archivo(self):
-        self.archivo = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                        filetypes=(("mp4 files","*.mp4"),("all files","*.*")))
-        if self.archivo != "":
-            self.nombreArchivo = (self.archivo).split("/")[-1]
-            self.nomArch.set(self.nombreArchivo)
-            self.videoInfo()
-
-    def videoInfo(self):
+def record():
+    global out, frame_counter
+    
+    out = cv2.VideoWriter(file_name("screenvideo",".avi"), fourcc, 20.0, (screen_size))#20.0 18.2 #17
+    while recording == True:
         try:
-            probe = ffmpeg.probe(self.archivo)
-            self.video_streams = [stream for stream in
-            probe["streams"] if stream["codec_type"] == "video"]
-            self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
-            #self.rateValue.set(video_streams[0]['avg_frame_rate'])
-            self.rateValue.set(self.null_finder('avg_frame_rate'))
-            self.rateBit.set(self.null_finder('bit_rate'))
-            self.chromaValue.set(self.null_finder('chroma_location'))
-            self.codecValue.set(self.null_finder('codec_name'))
-            self.codecTag.set(self.null_finder('codec_tag'))
-            self.codecTstr.set(self.null_finder('codec_tag_string'))
-            self.codecTbase.set(self.null_finder('codec_time_base'))
-            self.codecType.set(self.null_finder('codec_type'))
-            self.codedHeight.set(self.null_finder('coded_height'))
-            self.disaspRatio.set(self.null_finder('display_aspect_ratio'))
-            self.divxPacked.set(self.null_finder('divx_packed'))
-            self.duration.set(self.null_finder('duration'))
-            
-        except Exception as e:
-            print(str(e))
-            messagebox.showwarning("ERROR","No se pudo extraer la información.")
-
-    def null_finder(self,campo):
-        try:
-            value = self.video_streams[0][campo]
-            return value
+            img = pyautogui.screenshot()
+            frame = np.array(img)
+            frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+            out.write(frame)
+            frame_counter+=1
+            cuenta(frame_counter)
         except:
-            return "No info available"
-            
-            
+            pass
+        
+    print(frame_counter)
+    recorder.configure(text="Record")
+    out.release()
 
-if __name__=="__main__":
-    Visor()
+def record_sound():
+    global stream, CHUNK, frames, p, RATE, CHANNELS, WAVE_OUTPUT_FILENAME, FORMAT
+    while recording == True:
+        data = stream.read(CHUNK)
+        frames.append(data)
+    print("STOPPED")
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+
+    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
+
+ventana = Tk()
+ventana.title("Screen Recorder")
+ventana.geometry("507x143")
+ventana.configure(bg="light gray")
+directorio_actual=StringVar()
+screen_size = screen_s()
+
+
+Dirlabel = Entry(ventana,bg="white",width=90,textvariable=directorio_actual)
+Dirlabel.pack(padx=1,pady=1)
+clock = Label(ventana, fg='green', width=21, text="0:00:00", bg="black", font=("","29"))#text="00:00:00"
+clock.pack(pady=10)
+recorder = Button(ventana,text="Record",bg="light blue",fg="red",width=33,command=record_state)#gray66
+recorder.place(x=11,y=88)
+shoot = Button(ventana,text="Screenshot",bg="light blue",fg="red",width=33,command=screen_shoot)
+shoot.place(x=255,y=88)
+
+folder = Button(ventana,text="Select Folder",bg="gray66",width=68,command=direct)
+folder.pack(padx=1,side='bottom')
+
+get_dir()
+
+ventana.mainloop()
