@@ -21,6 +21,7 @@ class Visor:
         self.disaspRatio = StringVar()
         self.divxPacked = StringVar()
         self.duration =StringVar()
+        self.durationTs = StringVar()
         #duration_ts
         
         
@@ -83,6 +84,10 @@ class Visor:
         self.labelDuration.place(x=88,y=433)
         self.entryDuration = Entry(self.ventana,textvariable=self.duration)
         self.entryDuration.place(x=166,y=435)
+        self.labeldurationTs = Label(self.ventana,text="duration ts:",bg=color_ventana,font=("Arial",13))
+        self.labeldurationTs.place(x=70,y=463)
+        self.entrydurationTs = Entry(self.ventana,textvariable=self.durationTs)
+        self.entrydurationTs.place(x=166,y=465)
         
         self.ventana.mainloop()
 
@@ -113,6 +118,7 @@ class Visor:
             self.disaspRatio.set(self.null_finder('display_aspect_ratio'))
             self.divxPacked.set(self.null_finder('divx_packed'))
             self.duration.set(self.null_finder('duration'))
+            self.durationTs.set(self.null_finder('duration_ts'))
 
             #self.divxPacked.set(video_streams[0]['divx_packed'])
         except Exception as e:
