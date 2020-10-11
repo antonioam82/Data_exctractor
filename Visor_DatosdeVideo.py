@@ -1,3 +1,4 @@
+  
 import ffmpeg
 from tkinter import *
 from tkinter import filedialog, messagebox
@@ -22,7 +23,16 @@ class Visor:
         self.divxPacked = StringVar()
         self.duration =StringVar()
         self.durationTs = StringVar()
-        #duration_ts
+        self.hasbFrames = StringVar()
+
+                #'has_b_frames': 0,
+       # 'height': 360,
+         #'index': 0,
+         #'is_avc': 'true',
+          #'level': 30,
+          #'nal_length_size': '4',
+          #'nb_frames': '61',
+          #'pix_fmt': 'yuv420p',
         
         
 
@@ -88,6 +98,10 @@ class Visor:
         self.labeldurationTs.place(x=70,y=463)
         self.entrydurationTs = Entry(self.ventana,textvariable=self.durationTs)
         self.entrydurationTs.place(x=166,y=465)
+        self.labelhasbFrames = Label(self.ventana,text="has b frames:",bg=color_ventana,font=("Arial",13))
+        self.labelhasbFrames.place(x=360,y=103)
+        self.entryhasbFrames = Entry(self.ventana,textvariable=self.hasbFrames)
+        self.entryhasbFrames.place(x=473,y=106)
         
         self.ventana.mainloop()
 
@@ -119,6 +133,7 @@ class Visor:
             self.divxPacked.set(self.null_finder('divx_packed'))
             self.duration.set(self.null_finder('duration'))
             self.durationTs.set(self.null_finder('duration_ts'))
+            self.hasbFrames.set(self.null_finder('has_b_frames'))
 
             #self.divxPacked.set(video_streams[0]['divx_packed'])
         except Exception as e:
