@@ -24,8 +24,7 @@ class Visor:
         self.duration =StringVar()
         self.durationTs = StringVar()
         self.hasbFrames = StringVar()
-
-                #'has_b_frames': 0,
+        self.height = StringVar()
        # 'height': 360,
          #'index': 0,
          #'is_avc': 'true',
@@ -102,6 +101,10 @@ class Visor:
         self.labelhasbFrames.place(x=360,y=103)
         self.entryhasbFrames = Entry(self.ventana,textvariable=self.hasbFrames)
         self.entryhasbFrames.place(x=473,y=106)
+        self.labelHeight = Label(self.ventana,text="height:",bg=color_ventana,font=("Arial",13))
+        self.labelHeight.place(x=412,y=133)
+        self.entryHeight = Entry(self.ventana,textvariable=self.height)
+        self.entryHeight.place(x=473,y=136)
         
         self.ventana.mainloop()
 
@@ -119,7 +122,6 @@ class Visor:
             self.video_streams = [stream for stream in
             probe["streams"] if stream["codec_type"] == "video"]
             self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
-            #self.rateValue.set(video_streams[0]['avg_frame_rate'])
             self.rateValue.set(self.null_finder('avg_frame_rate'))
             self.rateBit.set(self.null_finder('bit_rate'))
             self.chromaValue.set(self.null_finder('chroma_location'))
@@ -134,8 +136,8 @@ class Visor:
             self.duration.set(self.null_finder('duration'))
             self.durationTs.set(self.null_finder('duration_ts'))
             self.hasbFrames.set(self.null_finder('has_b_frames'))
+            self.height.set(self.null_finder('height'))
 
-            #self.divxPacked.set(video_streams[0]['divx_packed'])
         except Exception as e:
             print(str(e))
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
