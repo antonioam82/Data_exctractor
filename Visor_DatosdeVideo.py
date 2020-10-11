@@ -25,8 +25,7 @@ class Visor:
         self.hasbFrames = StringVar()
         self.height = StringVar()
         self.index = StringVar()
-
-         #'index': 0,
+        self.isAvc = StringVar()
          #'is_avc': 'true',
           #'level': 30,
           #'nal_length_size': '4',
@@ -109,6 +108,10 @@ class Visor:
         self.labelIndex.place(x=418,y=163)
         self.entryIndex = Entry(self.ventana,textvariable=self.index)
         self.entryIndex.place(x=473,y=166)
+        self.labelisAvc = Label(self.ventana,text="is avc:",bg=color_ventana,font=("Arial",13))
+        self.labelisAvc.place(x=414,y=193)
+        self.entryisAvc = Entry(self.ventana,textvariable=self.isAvc)
+        self.entryisAvc.place(x=473,y=196)
         
         self.ventana.mainloop()
 
@@ -142,6 +145,7 @@ class Visor:
             self.hasbFrames.set(self.null_finder('has_b_frames'))
             self.height.set(self.null_finder('height'))
             self.index.set(self.null_finder('index'))
+            self.isAvc.set(self.null_finder('is_avc'))
 
         except Exception as e:
             print(str(e))
