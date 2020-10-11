@@ -1,4 +1,3 @@
-  
 import ffmpeg
 from tkinter import *
 from tkinter import filedialog, messagebox
@@ -25,7 +24,8 @@ class Visor:
         self.durationTs = StringVar()
         self.hasbFrames = StringVar()
         self.height = StringVar()
-       # 'height': 360,
+        self.index = StringVar()
+
          #'index': 0,
          #'is_avc': 'true',
           #'level': 30,
@@ -105,6 +105,10 @@ class Visor:
         self.labelHeight.place(x=412,y=133)
         self.entryHeight = Entry(self.ventana,textvariable=self.height)
         self.entryHeight.place(x=473,y=136)
+        self.labelIndex = Label(self.ventana,text="index:",bg=color_ventana,font=("Arial",13))
+        self.labelIndex.place(x=418,y=163)
+        self.entryIndex = Entry(self.ventana,textvariable=self.index)
+        self.entryIndex.place(x=473,y=166)
         
         self.ventana.mainloop()
 
@@ -137,6 +141,7 @@ class Visor:
             self.durationTs.set(self.null_finder('duration_ts'))
             self.hasbFrames.set(self.null_finder('has_b_frames'))
             self.height.set(self.null_finder('height'))
+            self.index.set(self.null_finder('index'))
 
         except Exception as e:
             print(str(e))
