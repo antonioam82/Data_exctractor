@@ -26,9 +26,9 @@ class Visor:
         self.height = StringVar()
         self.index = StringVar()
         self.isAvc = StringVar()
-         #'is_avc': 'true',
-          #'level': 30,
-          #'nal_length_size': '4',
+        self.level = StringVar()
+        self.nalLensiz = StringVar()
+        self.nbFrames = StringVar()
           #'nb_frames': '61',
           #'pix_fmt': 'yuv420p',
         
@@ -112,6 +112,18 @@ class Visor:
         self.labelisAvc.place(x=414,y=193)
         self.entryisAvc = Entry(self.ventana,textvariable=self.isAvc)
         self.entryisAvc.place(x=473,y=196)
+        self.labellevel = Label(self.ventana,text="level:",bg=color_ventana,font=("Arial",13))
+        self.labellevel.place(x=425,y=223)
+        self.entrylevel = Entry(self.ventana,textvariable=self.level)
+        self.entrylevel.place(x=473,y=226)
+        self.labelnLs = Label(self.ventana,text="nal length size:",bg=color_ventana,font=("Arial",13))
+        self.labelnLs.place(x=353,y=253)
+        self.entrynLs = Entry(self.ventana,textvariable=self.nalLensiz)
+        self.entrynLs.place(x=473,y=256)
+        self.labelnbFrames = Label(self.ventana,text="nb frames:",bg=color_ventana,font=("Arial",13))
+        self.labelnbFrames.place(x=383,y=283)
+        self.entrynbFrames = Entry(self.ventana,textvariable=self.nbFrames)
+        self.entrynbFrames.place(x=473,y=286)
         
         self.ventana.mainloop()
 
@@ -146,6 +158,9 @@ class Visor:
             self.height.set(self.null_finder('height'))
             self.index.set(self.null_finder('index'))
             self.isAvc.set(self.null_finder('is_avc'))
+            self.level.set(self.null_finder('level'))
+            self.nalLensiz.set(self.null_finder('nal_length_size'))
+            self.nbFrames.set(self.null_finder('nb_frames'))
 
         except Exception as e:
             print(str(e))
