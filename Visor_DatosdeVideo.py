@@ -29,7 +29,7 @@ class Visor:
         self.level = StringVar()
         self.nalLensiz = StringVar()
         self.nbFrames = StringVar()
-          #'nb_frames': '61',
+        self.pixFmt = StringVar()
           #'pix_fmt': 'yuv420p',
         
         
@@ -124,6 +124,10 @@ class Visor:
         self.labelnbFrames.place(x=383,y=283)
         self.entrynbFrames = Entry(self.ventana,textvariable=self.nbFrames)
         self.entrynbFrames.place(x=473,y=286)
+        self.labelpixFmt = Label(self.ventana,text="pix fmt:",bg=color_ventana,font=("Arial",13))
+        self.labelpixFmt.place(x=409,y=313)
+        self.entrypixFmt = Entry(self.ventana,textvariable=self.pixFmt)
+        self.entrypixFmt.place(x=473,y=316)
         
         self.ventana.mainloop()
 
@@ -161,6 +165,7 @@ class Visor:
             self.level.set(self.null_finder('level'))
             self.nalLensiz.set(self.null_finder('nal_length_size'))
             self.nbFrames.set(self.null_finder('nb_frames'))
+            self.pixFmt.set(self.null_finder('pix_fmt'))
 
         except Exception as e:
             print(str(e))
@@ -177,3 +182,4 @@ class Visor:
 
 if __name__=="__main__":
     Visor()
+
