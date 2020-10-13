@@ -19,7 +19,7 @@ class Visor:
         self.codedHeight = StringVar()
         self.codecWidth = StringVar()
         self.disaspRatio = StringVar()
-        self.divxPacked = StringVar()
+        #self.divxPacked = StringVar()
         self.duration =StringVar()
         self.durationTs = StringVar()
         self.hasbFrames = StringVar()
@@ -76,8 +76,8 @@ class Visor:
         Entry(self.ventana,textvariable=self.codedHeight).place(x=166,y=345)
         Label(self.ventana,text="display aspect ratio:",bg=color_ventana,font=("Arial",13)).place(x=5,y=373)
         Entry(self.ventana,textvariable=self.disaspRatio).place(x=166,y=375)
-        Label(self.ventana,text="divx packed:",bg=color_ventana,font=("Arial",13)).place(x=62,y=403)#88
-        Entry(self.ventana,textvariable=self.divxPacked).place(x=166,y=405)
+        #Label(self.ventana,text="divx packed:",bg=color_ventana,font=("Arial",13)).place(x=62,y=403)#88
+        #Entry(self.ventana,textvariable=self.divxPacked).place(x=166,y=405)
         Label(self.ventana,text="duration:",bg=color_ventana,font=("Arial",13)).place(x=88,y=433)
         Entry(self.ventana,textvariable=self.duration).place(x=166,y=435)
         Label(self.ventana,text="duration ts:",bg=color_ventana,font=("Arial",13)).place(x=70,y=463)
@@ -127,7 +127,7 @@ class Visor:
             self.codecType.set(self.null_finder('codec_type'))
             self.codedHeight.set(self.null_finder('coded_height'))
             self.disaspRatio.set(self.null_finder('display_aspect_ratio'))
-            self.divxPacked.set(self.null_finder('divx_packed'))
+            #self.divxPacked.set(self.null_finder('divx_packed'))
             self.duration.set(self.null_finder('duration'))
             self.durationTs.set(self.null_finder('duration_ts'))
             self.hasbFrames.set(self.null_finder('has_b_frames'))
