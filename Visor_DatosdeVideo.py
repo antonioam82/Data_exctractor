@@ -98,6 +98,8 @@ class Visor:
         Entry(self.ventana,textvariable=self.nbFrames).place(x=473,y=286)
         Label(self.ventana,text="pix fmt:",bg=color_ventana,font=("Arial",13)).place(x=409,y=313)
         Entry(self.ventana,textvariable=self.pixFmt).place(x=473,y=316)
+        Label(self.ventana,text="r frame rate:",bg=color_ventana,font=("Arial",13)).place(x=370,y=343)
+        Entry(self.ventana,textvariable=self.rframeRate).place(x=473,y=346)
         
         self.ventana.mainloop()
 
@@ -136,6 +138,7 @@ class Visor:
             self.nalLensiz.set(self.null_finder('nal_length_size'))
             self.nbFrames.set(self.null_finder('nb_frames'))
             self.pixFmt.set(self.null_finder('pix_fmt'))
+            self.rframeRate.set(self.null_finder('r_frame_rate'))
 
         except Exception as e:
             print(str(e))
@@ -152,4 +155,5 @@ class Visor:
 
 if __name__=="__main__":
     Visor()
+
 
