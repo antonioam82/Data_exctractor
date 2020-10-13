@@ -37,7 +37,7 @@ class Visor:
         color_ventana = "khaki"
         self.ventana.configure(bg=color_ventana)
         self.ventana.geometry("800x540")
-        self.ventana.title("VISOR DATOS DE VIDEO")
+        self.ventana.title("MEDIA DATA INFO")
         self.nomArch = StringVar()
         self.videoNameEntry = Entry(self.ventana,width=45,font=('Arial',15),textvariable=self.nomArch)
         self.videoNameEntry.place(x=10,y=10)
