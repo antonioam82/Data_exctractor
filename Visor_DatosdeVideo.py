@@ -31,9 +31,9 @@ class Visor:
         self.nbFrames = StringVar()
         self.pixFmt = StringVar()
         self.rframeRate = StringVar()
-        #r_frame_rate
-        #refs
-        #star_pts
+        self.refs = StringVar()
+        self.startPts = StringVar()
+        self.startTime = StringVar()
         #star_time
         #time_base
         #width
@@ -100,6 +100,13 @@ class Visor:
         Entry(self.ventana,textvariable=self.pixFmt).place(x=473,y=316)
         Label(self.ventana,text="r frame rate:",bg=color_ventana,font=("Arial",13)).place(x=370,y=343)
         Entry(self.ventana,textvariable=self.rframeRate).place(x=473,y=346)
+        Label(self.ventana,text="refs:",bg=color_ventana,font=("Arial",13)).place(x=428,y=373)
+        Entry(self.ventana,textvariable=self.refs).place(x=473,y=376)
+        Label(self.ventana,text="start pts:",bg=color_ventana,font=("Arial",13)).place(x=399,y=403)
+        Entry(self.ventana,textvariable=self.startPts).place(x=473,y=406)
+        Label(self.ventana,text="start time:",bg=color_ventana,font=("Arial",13)).place(x=390,y=433)
+        Entry(self.ventana,textvariable=self.startTime).place(x=473,y=436)
+        
         
         self.ventana.mainloop()
 
@@ -139,6 +146,9 @@ class Visor:
             self.nbFrames.set(self.null_finder('nb_frames'))
             self.pixFmt.set(self.null_finder('pix_fmt'))
             self.rframeRate.set(self.null_finder('r_frame_rate'))
+            self.refs.set(self.null_finder('refs'))
+            self.startPts.set(self.null_finder('start_pts'))
+            self.startTime.set(self.null_finder('start_time'))
 
         except Exception as e:
             print(str(e))
