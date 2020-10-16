@@ -35,7 +35,7 @@ class Visor:
         self.startPts = StringVar()
         self.startTime = StringVar()
         self.timeBase = StringVar()
-        #time_base
+        self.width = StringVar()
         #width
 
         #profile
@@ -108,7 +108,8 @@ class Visor:
         Entry(self.ventana,textvariable=self.startTime).place(x=473,y=436)
         Label(self.ventana,text="time base:",bg=color_ventana,font=("Arial",13)).place(x=387,y=463)
         Entry(self.ventana,textvariable=self.timeBase).place(x=473,y=466)
-        
+        Label(self.ventana,text="width:",bg=color_ventana,font=("Arial",13)).place(x=420,y=493)
+        Entry(self.ventana,textvariable=self.width).place(x=473,y=496)
         
         self.ventana.mainloop()
 
@@ -152,6 +153,7 @@ class Visor:
             self.startPts.set(self.null_finder('start_pts'))
             self.startTime.set(self.null_finder('start_time'))
             self.timeBase.set(self.null_finder('time_base'))
+            self.width.set(self.null_finder('width'))
 
         except Exception as e:
             print(str(e))
