@@ -7,7 +7,7 @@ class Visor:
 
         
         self.ventana = Tk()
-        
+        self.codecLong = StringVar()
         self.rateValue = StringVar()
         self.rateBit = StringVar()
         self.chromaValue = StringVar()
@@ -49,13 +49,14 @@ class Visor:
         color_ventana = "khaki"
         self.ventana.configure(bg=color_ventana)
         self.ventana.geometry("920x540")
-        self.ventana.title("VISOR DATOS DE VIDEO")
+        self.ventana.title("MEDIA FILE INFO")
         self.nomArch = StringVar()
         Entry(self.ventana,width=55,font=('Arial',15),textvariable=self.nomArch).place(x=10,y=10)
         Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo).place(x=653,y=12)
-        
+
+        Label(self.ventana,text="codec long name:",bg=color_ventana,font=("Arial",13)).place(x=21,y=60)
+        Entry(self.ventana,textvariable=self.codecLong,width=48).place(x=166,y=63)
         Label(self.ventana,text="avg frame rate:",bg=color_ventana,font=("Arial",13)).place(x=43,y=103)
-        #self.labelRate.place(x=43,y=103)
         Entry(self.ventana,textvariable=self.rateValue).place(x=166,y=106)
         Label(self.ventana,text="bit rate:",bg=color_ventana,font=("Arial",13)).place(x=97,y=133)
         Entry(self.ventana,textvariable=self.rateBit).place(x=166,y=135)
@@ -134,6 +135,7 @@ class Visor:
             self.rateBit.set(self.null_finder('bit_rate'))
             self.chromaValue.set(self.null_finder('chroma_location'))
             self.codecValue.set(self.null_finder('codec_name'))
+            self.codecLong.set(self.null_finder('codec_long_name'))
             self.codecTag.set(self.null_finder('codec_tag'))
             self.codecTstr.set(self.null_finder('codec_tag_string'))
             self.codecTbase.set(self.null_finder('codec_time_base'))
