@@ -119,7 +119,7 @@ class Visor:
 
     def abrir_archivo(self):
         self.archivo = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                        filetypes=(("mp4 files","*.mp4"),("all files","*.*")))
+                        filetypes=(("mp4 files","*.mp4"),("avi files","*.avi"),("gif files","*.gif"),("all files","*.*")))
         if self.archivo != "":
             self.nombreArchivo = (self.archivo).split("/")[-1]
             self.nomArch.set(self.nombreArchivo)
