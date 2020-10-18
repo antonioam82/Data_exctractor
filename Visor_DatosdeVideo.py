@@ -19,7 +19,7 @@ class Visor:
         self.codedHeight = StringVar()
         self.codecWidth = StringVar()
         self.disaspRatio = StringVar()
-        #self.divxPacked = StringVar()
+        self.divxPacked = StringVar()
         self.duration =StringVar()
         self.durationTs = StringVar()
         self.hasbFrames = StringVar()
@@ -36,7 +36,8 @@ class Visor:
         self.startTime = StringVar()
         self.timeBase = StringVar()
         self.width = StringVar()
-        #width
+        #self.tags = StringVar()
+        self.profile = StringVar()
 
         #profile
         #tags
@@ -47,13 +48,11 @@ class Visor:
 
         color_ventana = "khaki"
         self.ventana.configure(bg=color_ventana)
-        self.ventana.geometry("800x540")
+        self.ventana.geometry("920x540")
         self.ventana.title("VISOR DATOS DE VIDEO")
         self.nomArch = StringVar()
-        self.videoNameEntry = Entry(self.ventana,width=45,font=('Arial',15),textvariable=self.nomArch)
-        self.videoNameEntry.place(x=10,y=10)
-        self.btnBuscar = Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo)
-        self.btnBuscar.place(x=540,y=12)
+        Entry(self.ventana,width=55,font=('Arial',15),textvariable=self.nomArch).place(x=10,y=10)
+        Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo).place(x=653,y=12)
         
         Label(self.ventana,text="avg frame rate:",bg=color_ventana,font=("Arial",13)).place(x=43,y=103)
         #self.labelRate.place(x=43,y=103)
@@ -76,12 +75,14 @@ class Visor:
         Entry(self.ventana,textvariable=self.codedHeight).place(x=166,y=345)
         Label(self.ventana,text="display aspect ratio:",bg=color_ventana,font=("Arial",13)).place(x=5,y=373)
         Entry(self.ventana,textvariable=self.disaspRatio).place(x=166,y=375)
-        #Label(self.ventana,text="divx packed:",bg=color_ventana,font=("Arial",13)).place(x=62,y=403)#88
-        #Entry(self.ventana,textvariable=self.divxPacked).place(x=166,y=405)
+        Label(self.ventana,text="divx packed:",bg=color_ventana,font=("Arial",13)).place(x=62,y=403)#88
+        Entry(self.ventana,textvariable=self.divxPacked).place(x=166,y=405)
         Label(self.ventana,text="duration:",bg=color_ventana,font=("Arial",13)).place(x=88,y=433)
         Entry(self.ventana,textvariable=self.duration).place(x=166,y=435)
         Label(self.ventana,text="duration ts:",bg=color_ventana,font=("Arial",13)).place(x=70,y=463)
         Entry(self.ventana,textvariable=self.durationTs).place(x=166,y=465)
+        Label(self.ventana,text="profile:",bg=color_ventana,font=("Arial",13)).place(x=65,y=493)
+        Entry(self.ventana,textvariable=self.profile,width=27).place(x=125,y=495)
         Label(self.ventana,text="has b frames:",bg=color_ventana,font=("Arial",13)).place(x=360,y=103)
         Entry(self.ventana,textvariable=self.hasbFrames).place(x=473,y=106)
         Label(self.ventana,text="height:",bg=color_ventana,font=("Arial",13)).place(x=412,y=133)
@@ -110,6 +111,8 @@ class Visor:
         Entry(self.ventana,textvariable=self.timeBase).place(x=473,y=466)
         Label(self.ventana,text="width:",bg=color_ventana,font=("Arial",13)).place(x=420,y=493)
         Entry(self.ventana,textvariable=self.width).place(x=473,y=496)
+        #Label(self.ventana,text="tags:",bg=color_ventana,font=("Arial",13)).place(x=732,y=103)
+        #Entry(self.ventana,textvariable=self.tags).place(x=780,y=106)
         
         self.ventana.mainloop()
 
@@ -137,9 +140,10 @@ class Visor:
             self.codecType.set(self.null_finder('codec_type'))
             self.codedHeight.set(self.null_finder('coded_height'))
             self.disaspRatio.set(self.null_finder('display_aspect_ratio'))
-            #self.divxPacked.set(self.null_finder('divx_packed'))
+            self.divxPacked.set(self.null_finder('divx_packed'))
             self.duration.set(self.null_finder('duration'))
             self.durationTs.set(self.null_finder('duration_ts'))
+            self.profile.set(self.null_finder('profile'))
             self.hasbFrames.set(self.null_finder('has_b_frames'))
             self.height.set(self.null_finder('height'))
             self.index.set(self.null_finder('index'))
@@ -154,6 +158,7 @@ class Visor:
             self.startTime.set(self.null_finder('start_time'))
             self.timeBase.set(self.null_finder('time_base'))
             self.width.set(self.null_finder('width'))
+            #self.tags.set(self.null_finder('tags'))
 
         except Exception as e:
             print(str(e))
