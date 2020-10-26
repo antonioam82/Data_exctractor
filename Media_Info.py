@@ -37,14 +37,7 @@ class Visor:
         self.startTime = StringVar()
         self.timeBase = StringVar()
         self.width = StringVar()
-        #self.tags = StringVar()
         self.profile = StringVar()
-
-        #profile
-        #tags
-        #disposition
-        #codec_long_name
-        
         
 
         color_ventana = "gray80"
@@ -117,8 +110,6 @@ class Visor:
         Label(self.ventana,text="Disposition & Tags Info:",bg=color_ventana).place(x=653,y=84)
         self.disposition = sct.ScrolledText(self.ventana,width=28,height=25)
         self.disposition.place(x=653,y=104)
-        #Label(self.ventana,text="tags:",bg=color_ventana,font=("Arial",13)).place(x=732,y=103)
-        #Entry(self.ventana,textvariable=self.tags).place(x=780,y=106)
         
         self.ventana.mainloop()
 
@@ -167,18 +158,21 @@ class Visor:
             self.width.set(self.null_finder('width'))
             self.disposition.delete('1.0',END)
             self.disposition.insert(END,'DISPOSITION:\n')
-            for i in self.video_streams[0]['disposition']:
-                self.disposition.insert(END,('{}: {}\n'.format(i,self.video_streams[0]['disposition'][i])))
+            self.sp_infos('disposition')
             self.disposition.insert(END,'\n\nTAGS:\n')
-            for t in self.video_streams[0]['tags']:
-                self.disposition.insert(END,('{}: {}\n'.format(t,self.video_streams[0]['tags'][t])))
-            
-            
-            #self.tags.set(self.null_finder('tags'))
+            self.sp_infos('tags')
 
         except Exception as e:
             print(str(e))
             messagebox.showwarning("ERROR","No se pudo extraer la información.")
+            
+    def sp_infos(self,campos):
+        try:
+            for i in self.video_streams[0][campos]:
+                self.disposition.insert(END,('{}: {}\n'.format(i,self.video_streams[0][campos][i])))
+        except:
+            self.disposition.insert(END,'No info available')
+            
 
     def null_finder(self,campo):
         try:
