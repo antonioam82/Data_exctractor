@@ -1,5 +1,6 @@
 import ffmpeg
 from tkinter import *
+import tkinter.scrolledtext as sct
 from tkinter import filedialog, messagebox
 
 class Visor:
@@ -113,6 +114,8 @@ class Visor:
         Entry(self.ventana,textvariable=self.timeBase,bg=color_fondo).place(x=473,y=466)
         Label(self.ventana,text="width:",bg=color_ventana,font=("Arial",13)).place(x=420,y=493)
         Entry(self.ventana,textvariable=self.width,bg=color_fondo).place(x=473,y=496)
+        self.disposition = sct.ScrolledText(self.ventana,width=28,height=25)
+        self.disposition.place(x=653,y=104)
         #Label(self.ventana,text="tags:",bg=color_ventana,font=("Arial",13)).place(x=732,y=103)
         #Entry(self.ventana,textvariable=self.tags).place(x=780,y=106)
         
@@ -161,6 +164,14 @@ class Visor:
             self.startTime.set(self.null_finder('start_time'))
             self.timeBase.set(self.null_finder('time_base'))
             self.width.set(self.null_finder('width'))
+            self.disposition.insert(END,'DISPOSITION:\n')
+            for i in self.video_streams[0]['disposition']:
+                self.disposition.insert(END,('{}: {}\n'.format(i,self.video_streams[0]['disposition'][i])))
+            self.disposition.insert(END,'\n\nTAGS:\n')
+            for t in self.video_streams[0]['tags']:
+                self.disposition.insert(END,('{}: {}\n'.format(t,self.video_streams[0]['tags'][t])))
+            
+            
             #self.tags.set(self.null_finder('tags'))
 
         except Exception as e:
