@@ -165,6 +165,7 @@ class Visor:
             self.startTime.set(self.null_finder('start_time'))
             self.timeBase.set(self.null_finder('time_base'))
             self.width.set(self.null_finder('width'))
+            self.disposition.delete('1.0',END)
             self.disposition.insert(END,'DISPOSITION:\n')
             for i in self.video_streams[0]['disposition']:
                 self.disposition.insert(END,('{}: {}\n'.format(i,self.video_streams[0]['disposition'][i])))
