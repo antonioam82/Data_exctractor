@@ -114,6 +114,7 @@ class Visor:
         Entry(self.ventana,textvariable=self.timeBase,bg=color_fondo).place(x=473,y=466)
         Label(self.ventana,text="width:",bg=color_ventana,font=("Arial",13)).place(x=420,y=493)
         Entry(self.ventana,textvariable=self.width,bg=color_fondo).place(x=473,y=496)
+        Label(self.ventana,text="Disposition & Tags Info:",bg=color_ventana).place(x=653,y=84)
         self.disposition = sct.ScrolledText(self.ventana,width=28,height=25)
         self.disposition.place(x=653,y=104)
         #Label(self.ventana,text="tags:",bg=color_ventana,font=("Arial",13)).place(x=732,y=103)
