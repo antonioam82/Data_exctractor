@@ -6,7 +6,6 @@ from tkinter import filedialog, messagebox
 class Visor:
     def __init__(self):
 
-        
         self.ventana = Tk()
         self.codecLong = StringVar()
         self.rateValue = StringVar()
@@ -47,7 +46,7 @@ class Visor:
         self.nomArch = StringVar()
         color_fondo = "khaki"
         Entry(self.ventana,width=55,font=('Arial',15),textvariable=self.nomArch).place(x=10,y=10)
-        Button(self.ventana,text='BUSCAR',width=34,command=self.abrir_archivo).place(x=653,y=12)
+        Button(self.ventana,text='SEARCH',width=34,command=self.abrir_archivo).place(x=653,y=12)
 
         Label(self.ventana,text="codec long name:",bg=color_ventana,font=("Arial",13)).place(x=21,y=60)
         Entry(self.ventana,textvariable=self.codecLong,width=48,bg=color_fondo).place(x=166,y=63)
@@ -171,7 +170,7 @@ class Visor:
             for i in self.video_streams[0][campos]:
                 self.disposition.insert(END,('{}: {}\n'.format(i,self.video_streams[0][campos][i])))
         except:
-            self.disposition.insert(END,'No info available')
+            self.disposition.insert(END,'No Info Available')
             
 
     def null_finder(self,campo):
@@ -179,11 +178,8 @@ class Visor:
             value = self.video_streams[0][campo]
             return value
         except:
-            return "No info available"
+            return 'No Info Available'
             
-            
-
 if __name__=="__main__":
     Visor()
-
 
