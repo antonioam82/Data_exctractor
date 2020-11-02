@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import ffmpeg
 from tkinter import *
 import tkinter.scrolledtext as sct
@@ -114,7 +116,8 @@ class Visor:
 
     def abrir_archivo(self):
         self.archivo = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                        filetypes=(("mp4 files","*.mp4"),("avi files","*.avi"),("gif files","*.gif"),("all files","*.*")))
+                        filetypes=(("mp4 files","*.mp4"),("avi files","*.avi"),("gif files","*.gif"),
+                                       ("png files","*.png"),("jpg files","*.jpg"),("all files","*.*")))
         if self.archivo != "":
             self.nombreArchivo = (self.archivo).split("/")[-1]
             self.nomArch.set(self.nombreArchivo)
