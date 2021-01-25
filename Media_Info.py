@@ -126,8 +126,6 @@ class Visor:
     def videoInfo(self):
         try:
             probe = ffmpeg.probe(self.archivo)
-            self.video_streams = [stream for stream in
-            probe["streams"] if stream["codec_type"] == "video"]
             self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
             self.rateValue.set(self.null_finder('avg_frame_rate'))
             self.rateBit.set(self.null_finder('bit_rate'))
