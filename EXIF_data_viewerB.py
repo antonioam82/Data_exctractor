@@ -6,7 +6,7 @@ import re
 import tkinter.scrolledtext as scrolledtext
 from tkinter import filedialog
 from PIL import Image
-from PIL.ExifTags import TAGS
+from PIL.ExifTags import TAGS #utf-8
 import warnings
 import piexif
 
@@ -31,12 +31,15 @@ class App:
         self.ventana.mainloop()
 
     def open_file(self):
-        self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                                        filetypes=(("jpeg files","*.jpg"),("all files","*.*")))
-        if self.file != "":
-            self.filename = (self.file).split("/")[-1]
-            self.file_label.configure(text=self.filename)
-            self.extract_data(self.file)
+        try:
+            self.file = (filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
+                                    filetypes=(("jpeg files","*.jpg"),("all files","*.*"))))
+            if self.file != "":
+                self.filename = (self.file).split("/")[-1]
+                self.file_label.configure(text=self.filename)
+                self.extract_data(self.file)
+        except Exception as e:
+            messagebox.showwarning("ERROR",str(e))
 
     def extract_data(self,f):
         self.display.delete('1.0',END)
